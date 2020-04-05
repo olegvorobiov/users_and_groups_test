@@ -1,0 +1,8 @@
+chantelle:password:2001:2000:Chantelle Michaels:/home/chantelle:/bin/bash
+jacob:password:3001:3000:Jacob Sanders:/home/jacob:/bin/bash
+vadim:password:3002:3000:Vadim Ivanov:/home/vadim:/bin/bash
+oleg:password:3003:3000:Oleg Aleksanddrov:/home/oleg:/bin/bash
+alex:password:4001:4000:Alex Johnson:/home/alex:/bin/bash
+peter:password:4002:4000:Peter Kong:/home/peter:/bin/bash
+mohammad:password:5000:5000:Mohammad Akbar:/home/mohammad:/bin/bash
+system-user::501:500:System User:/home/system-user:/sbin/nologin

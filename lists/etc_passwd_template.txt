@@ -1,0 +1,32 @@
+root:x:0:0:root:/root:/bin/bash
+bin:x:1:1:bin:/bin:/sbin/nologin
+daemon:x:2:2:daemon:/sbin:/sbin/nologin
+adm:x:3:4:adm:/var/adm:/sbin/nologin
+lp:x:4:7:lp:/var/spool/lpd:/sbin/nologin
+sync:x:5:0:sync:/sbin:/bin/sync
+shutdown:x:6:0:shutdown:/sbin:/sbin/shutdown
+halt:x:7:0:halt:/sbin:/sbin/halt
+mail:x:8:12:mail:/var/spool/mail:/sbin/nologin
+operator:x:11:0:operator:/root:/sbin/nologin
+games:x:12:100:games:/usr/games:/sbin/nologin
+ftp:x:14:50:FTP User:/var/ftp:/sbin/nologin
+nobody:x:99:99:Nobody:/:/sbin/nologin
+systemd-network:x:192:192:systemd Network Management:/:/sbin/nologin
+dbus:x:81:81:System message bus:/:/sbin/nologin
+polkitd:x:999:997:User for polkitd:/:/sbin/nologin
+postfix:x:89:89::/var/spool/postfix:/sbin/nologin
+chrony:x:998:996::/var/lib/chrony:/sbin/nologin
+sshd:x:74:74:Privilege-separated SSH:/var/empty/sshd:/sbin/nologin
+chantelle:x:2001:2000:Chantelle Michaels:/home/chantelle:/bin/bash
+jacob:x:3001:3000:Jacob Sanders:/home/jacob:/bin/bash
+vadim:x:3002:3000:Vadim Ivanov:/home/vadim:/bin/bash
+oleg:x:3003:3000:Oleg Aleksandrov:/home/oleg:/bin/bash
+alex:x:4001:4000:Alex Johnson:/home/alex:/bin/bash
+peter:x:4002:4000:Peter Kong:/home/peter:/bin/bash
+mohammad:x:5000:5000:Mohammad Akbar:/home/mohammad:/bin/bash
+system-user:x:501:500:System User:/home/system-user:/sbin/nologin
+contractor1:x:5001:5001::/home/contractor1:/bin/bash
+contractor2:x:5002:5002::/home/contractor2:/bin/bash
+contractor3:x:5003:5003::/home/contractor3:/bin/bash
+contractor4:x:5004:5004::/home/contractor4:/bin/bash
+contractor5:x:5005:5005::/home/contractor5:/bin/bash
