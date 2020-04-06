@@ -5,6 +5,10 @@ if (( $?==0 ))
 then
     disaster.sh
     echo
+    echo "You can start on your test"
+else
+    disaster.sh
+    echo
     echo
     read -p "Please enter your first name then press Enter: " first_name
     echo
@@ -19,8 +23,4 @@ then
     echo "Type reboot and press Enter"
     echo 
     echo "Good luck!"
-else
-    disaster.sh
-    echo
-    echo "You can start on your test"
 fi
