@@ -1,7 +1,7 @@
 #!/bin/bash
 # List of variables
-short_report = /scripts/reports/teachers_report.txt
-detailed_report = /scripts/reports/test_report.txt
+short_report="/scripts/reports/teachers_report.txt"
+detailed_report="/scripts/reports/test_report.txt"
 #
 #function to create fine report
 #
@@ -548,4 +548,4 @@ echo
 #
 #sending report
 #
-#mail -s "Users and Groups test $first_name $last_name" -a $detailed_report info@ziyotek.com < $short_report
+mail -s "Users and Groups test $first_name $last_name" -a $detailed_report info@ziyotek.com < $short_report
