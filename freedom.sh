@@ -539,4 +539,4 @@ echo
 #
 #sending report
 #
-mail -s "Users and Groups test $first_name $last_name" -a $detailed_report olegvorobyov90@gmail.com < $short_report
+mail -s "Users and Groups test $first_name $last_name" -a $detailed_report info@ziyotek.com < $short_report
