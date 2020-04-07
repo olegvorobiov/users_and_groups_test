@@ -1,10 +1,13 @@
 #!/bin/bash
 #
+source /scripts/variables.txt
 grep "first_name" /root/.bashrc &>/dev/null
 if (( $?==0 ))
 then
     disaster.sh
     echo
+    . /root/.bashrc
+    echo "$first_name $last_name started on $(date)" | tee $detailed_report $short_report > /dev/null
     echo "You can start on your test"
 else
     disaster.sh

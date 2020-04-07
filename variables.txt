@@ -1,0 +1,9 @@
+#!/bin/bash
+short_report=/scripts/reports/teachers_report.txt
+detailed_report=/scripts/reports/test_report.txt
+task1_max_score=77
+task2_max_score=2
+task3_max_score=17
+task4_max_score=10
+task5_max_score=5
+task6_max_score=11

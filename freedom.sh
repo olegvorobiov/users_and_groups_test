@@ -1,7 +1,6 @@
 #!/bin/bash
-# List of variables
-short_report="/scripts/reports/teachers_report.txt"
-detailed_report="/scripts/reports/test_report.txt"
+# Sourcing variables
+source /scripts/variables.txt
 #
 #function to create fine report
 #
@@ -18,14 +17,6 @@ fine_report (){
 	echo "Total score for Task $1 is $2 out of $3" | tee -a $short_report
 }
 #
-#max scores for the tasks
-#
-task1_max_score=77
-task2_max_score=2
-task3_max_score=17
-task4_max_score=10
-task5_max_score=5
-task6_max_score=11
 #
 ######################################### TASK # 1 ###########################################################
 #
@@ -124,7 +115,7 @@ done
 #
 for i in $(cat /scripts/lists/group_list.txt)
 do
-	grep "$i" /etc/group > /dev/null
+	grep "$i\>" /etc/group > /dev/null
 	if (( $?==0 ))
 	then
 		echo "Group $i was created + 1 point" >> $detailed_report
@@ -548,4 +539,4 @@ echo
 #
 #sending report
 #
-mail -s "Users and Groups test $first_name $last_name" -a $detailed_report info@ziyotek.com < $short_report
+mail -s "Users and Groups test $first_name $last_name" -a $detailed_report olegvorobyov90@gmail.com < $short_report
