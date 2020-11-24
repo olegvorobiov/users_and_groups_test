@@ -256,8 +256,8 @@ fi
 #
 #checking login.defs
 #
-pass_max=$(grep "^PASS_MAX_DAYS" /etc/login.defs | cut -d " " -f2)
-pass_warn=$(grep "^PASS_WARN_AGE" /etc/login.defs | cut -d " " -f2)
+pass_max=$(grep "^PASS_MAX_DAYS" /etc/login.defs | tr -s " " | cut -d " " -f2)
+pass_warn=$(grep "^PASS_WARN_AGE" /etc/login.defs | tr -s " " | cut -d " " -f2)
 if (( $pass_max==180 ))
 then
 	echo "New users have password expiration in 180 days is set + 1 point" >> $detailed_report
