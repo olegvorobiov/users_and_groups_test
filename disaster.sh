@@ -4,20 +4,20 @@
 #
 #deleting groups, retuning to original state 
 #
-cut -d ":" -f1 /etc/group > /scripts/temp/etc_group_list.txt
-cut -d ":" -f1 /scripts/original_copy/etc_group_orig.txt > /scripts/temp/etc_group_list_orig.txt
-cat /scripts/temp/etc_group_list.txt /scripts/temp/etc_group_list_orig.txt | sort | uniq -u > /scripts/temp/group_delete_list.txt
-for j in $(cat /scripts/temp/group_delete_list.txt)
+cut -d ":" -f1 /etc/group > /var/scripts/temp/etc_group_list.txt
+cut -d ":" -f1 /var/scripts/original_copy/etc_group_orig.txt > /var/scripts/temp/etc_group_list_orig.txt
+cat /var/scripts/temp/etc_group_list.txt /var/scripts/temp/etc_group_list_orig.txt | sort | uniq -u > /var/scripts/temp/group_delete_list.txt
+for j in $(cat /var/scripts/temp/group_delete_list.txt)
 do
 	groupdel -f $j
 done
 #
 #deleting users, returning to original state
 #
-cut -d ":" -f1 /etc/passwd > /scripts/temp/etc_passwd_list.txt
-cut -d ":" -f1 /scripts/original_copy/etc_passwd_orig.txt > /scripts/temp/etc_passwd_list_orig.txt
-cat /scripts/temp/etc_passwd_list.txt /scripts/temp/etc_passwd_list_orig.txt | sort | uniq -u > /scripts/temp/users_delete_list.txt
-for i in $(cat /scripts/temp/users_delete_list.txt)
+cut -d ":" -f1 /etc/passwd > /var/scripts/temp/etc_passwd_list.txt
+cut -d ":" -f1 /var/scripts/original_copy/etc_passwd_orig.txt > /var/scripts/temp/etc_passwd_list_orig.txt
+cat /var/scripts/temp/etc_passwd_list.txt /var/scripts/temp/etc_passwd_list_orig.txt | sort | uniq -u > /var/scripts/temp/users_delete_list.txt
+for i in $(cat /var/scripts/temp/users_delete_list.txt)
 do
 	userdel -r $i
 done
@@ -32,14 +32,14 @@ rm -rf /projects
 sed -i "s/^oleg.*/ /" /etc/sudoers
 sed -i "s/^vadim.*/ /" /etc/sudoers
 sed -i "s/^alex.*/ /" /etc/sudoers
-sed -i "s/^mohammad.*/ /" /etc/sudoers
+sed -i "s/^john.*/ /" /etc/sudoers
 sed -i "s/^\%engineering.*/ /" /etc/sudoers
 rm -rf /etc/sudoers.d/*
 #
 #deleting temporary files
 #
-rm -rf /scripts/temp/*
-rm -rf /scripts/reports/*
+rm -rf /var/scripts/temp/*
+rm -rf /var/scripts/reports/*
 #
 #deleting logs
 #

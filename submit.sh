@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-source /scripts/variables.txt
+source /var/scripts/variables.txt
 if (( $(cat $short_report | wc -l)>1 ))
 then
     echo

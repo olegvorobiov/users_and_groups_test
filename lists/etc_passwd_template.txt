@@ -23,7 +23,7 @@ vadim:x:3002:3000:Vadim Ivanov:/home/vadim:/bin/bash
 oleg:x:3003:3000:Oleg Aleksandrov:/home/oleg:/bin/bash
 alex:x:4001:4000:Alex Johnson:/home/alex:/bin/bash
 peter:x:4002:4000:Peter Kong:/home/peter:/bin/bash
-mohammad:x:5000:5000:Mohammad Akbar:/home/mohammad:/bin/bash
+john:x:5000:5000:John Smith:/home/john:/bin/bash
 system-user:x:501:500:System User:/home/system-user:/sbin/nologin
 contractor1:x:5001:5001::/home/contractor1:/bin/bash
 contractor2:x:5002:5002::/home/contractor2:/bin/bash

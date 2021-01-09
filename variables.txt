@@ -1,6 +1,6 @@
 #!/bin/bash
-short_report=/scripts/reports/teachers_report.txt
-detailed_report=/scripts/reports/test_report.txt
+short_report=/var/scripts/reports/teachers_report.txt
+detailed_report=/var/scripts/reports/test_report.txt
 task1_max_score=77
 task2_max_score=2
 task3_max_score=17

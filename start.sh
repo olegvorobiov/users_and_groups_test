@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-source /scripts/variables.txt
+source /var/scripts/variables.txt
 grep "first_name" /root/.bashrc &>/dev/null
 if (( $?==0 ))
 then

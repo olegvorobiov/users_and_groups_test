@@ -8,7 +8,7 @@ disk:x:6:
 lp:x:7:
 mem:x:8:
 kmem:x:9:
-wheel:x:10:mohammad
+wheel:x:10:john
 cdrom:x:11:
 mail:x:12:postfix
 man:x:15:
@@ -37,7 +37,7 @@ sshd:x:74:
 hr:x:2000:
 hiring:x:6000:chantelle,alex,peter
 engineering:x:3000:
-migration:x:7000:jacob,vadim,oleg,mohammad
+migration:x:7000:jacob,vadim,oleg,john
 devops:x:4000:
 consultants:x:5000:contractor1,contractor2,contractor3,contractor4,contractor5
 system:x:500:

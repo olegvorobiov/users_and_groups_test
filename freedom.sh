@@ -1,6 +1,6 @@
 #!/bin/bash
 # Sourcing variables
-source /scripts/variables.txt
+source /var/scripts/variables.txt
 #
 #function to create fine report
 #
@@ -29,7 +29,7 @@ task1_score=0
 #
 #checking if username exists
 #
-for i in $(cat /scripts/lists/usernames.txt)
+for i in $(cat /var/scripts/lists/usernames.txt)
 do
 	grep "$i" /etc/passwd > /dev/null
 	if (( $?==0 ))
@@ -44,11 +44,11 @@ done
 #
 #checking if all of the fields from /etc/passwd match
 #
-for i in $(cat /scripts/lists/usernames.txt)
+for i in $(cat /var/scripts/lists/usernames.txt)
 do
 	for field_name in {3..7}
 	do
-		field=$(grep "$i" /etc/passwd | cut -d ":" -f "$field_name" && grep "$i" /scripts/lists/etc_passwd_template.txt | cut -d ":" -f "$field_name")
+		field=$(grep "$i" /etc/passwd | cut -d ":" -f "$field_name" && grep "$i" /var/scripts/lists/etc_passwd_template.txt | cut -d ":" -f "$field_name")
 		field_chk=$(echo $field | sed "s/ /\n/g" | sort | uniq -u | wc -l)
 		case $field_name in
 		3 )
@@ -85,7 +85,7 @@ if [[ $(grep "system-user" /etc/shadow | cut -d ":" -f2) == '!!' ]]
 		echo "User system-user has a password - failed" >> $detailed_report
 fi
 #
-for i in chantelle jacob vadim oleg alex peter mohammad
+for i in chantelle jacob vadim oleg alex peter john
 do
 	if [[ -d /home/$i && /home/$i = $(grep "$i" /etc/passwd | cut -d ":" -f6) ]]
 	then
@@ -113,7 +113,7 @@ done
 #
 #checking if groups were created
 #
-for i in $(cat /scripts/lists/group_list.txt)
+for i in $(cat /var/scripts/lists/group_list.txt)
 do
 	grep "$i\>" /etc/group > /dev/null
 	if (( $?==0 ))
@@ -128,9 +128,9 @@ done
 #
 #checking if group id matches
 #
-for i in $(cat /scripts/lists/group_list.txt)
+for i in $(cat /var/scripts/lists/group_list.txt)
 do
-	GID=$(grep "$i\b" /etc/group | cut -d ":" -f3 && grep "$i\b" /scripts/lists/etc_group_template.txt | cut -d ":" -f3)
+	GID=$(grep "$i\b" /etc/group | cut -d ":" -f3 && grep "$i\b" /var/scripts/lists/etc_group_template.txt | cut -d ":" -f3)
 	GID_chk=$( echo $GID | sed "s/ /\n/" | uniq -u | wc -l)
 	if (( $GID_chk==0 ))
 	then
@@ -156,7 +156,7 @@ do
 		echo "User $i isn't a part of hiring group - failed" >> $detailed_report
 	fi
 done
-for i in jacob vadim oleg mohammad
+for i in jacob vadim oleg john
 do
 	grep "migration\b" /etc/group | grep "$i" > /dev/null
 	if (( $?==0 ))
@@ -185,16 +185,16 @@ echo "########## TASK 2 ########## " >> $detailed_report
 #collecting user and group info from possible sources
 #
 task2_score=0
-grep "\%engineering" /etc/sudoers >> /scripts/temp/sudoers_check.txt
-grep "\<mohammad\>" /etc/sudoers >> /scripts/temp/sudoers_check.txt
-grep "wheel" /etc/group | grep "mohammad" >> /scripts/temp/sudoers_check.txt
-cat /etc/sudoers.d/* >> /scripts/temp/sudoers_check.txt
+grep "\%engineering" /etc/sudoers >> /var/scripts/temp/sudoers_check.txt
+grep "\<john\>" /etc/sudoers >> /var/scripts/temp/sudoers_check.txt
+grep "wheel" /etc/group | grep "john" >> /var/scripts/temp/sudoers_check.txt
+cat /etc/sudoers.d/* >> /var/scripts/temp/sudoers_check.txt
 #
-#checking if engineering and mohammad is in the file
+#checking if engineering and john is in the file
 #
-for i in mohammad %engineering
+for i in john %engineering
 do
-	grep "$i" /scripts/temp/sudoers_check.txt > /dev/null
+	grep "$i" /var/scripts/temp/sudoers_check.txt > /dev/null
 	if (( $?==0 ))
 	then
 		echo "$i has sudo privileges + 1 point" >> $detailed_report
@@ -242,16 +242,16 @@ do
 	fi
 done
 #
-#checking Mohammad's account expiration date
+#checking John's account expiration date
 #
-days_before_exp=$(($(grep "mohammad" /etc/shadow | cut -d ":" -f8)-$(grep "mohammad" /etc/shadow | cut -d ":" -f3)))
+days_before_exp=$(($(grep "john" /etc/shadow | cut -d ":" -f8)-$(grep "john" /etc/shadow | cut -d ":" -f3)))
 if (( $days_before_exp>=88 && $days_before_exp<=92 ))
 then
-	echo "Mohammad's account expiration set correctly + 1 point" >> $detailed_report
+	echo "John's account expiration set correctly + 1 point" >> $detailed_report
 	((task3_score++))
 	((test_score++))
 else
-	echo "Mohammad's account expiration set incorrectly - failed" >> $detailed_report
+	echo "John's account expiration set incorrectly - failed" >> $detailed_report
 fi
 #
 #checking login.defs
@@ -316,7 +316,7 @@ do
 	fi
 done
 #
-for i in jacob vadim oleg mohammad
+for i in jacob vadim oleg john
 do
 	if [ $(grep "^PATH" /home/$i/.bash_profile | awk -F: '{print $NF}') == '/projects/dcm' ]
 	then
@@ -340,18 +340,18 @@ echo "Total scores so far: $test_score" >> $detailed_report
 echo "########## TASK 5 ########## " >> $detailed_report
 #
 #
-#checking if contractors were added by mohammad
+#checking if contractors were added by john
 #
 for i in  contractor{1..5}
 do
-	grep "sudo: mohammad" /var/log/secure | grep "/sbin/useradd $i" > /dev/null
+	grep "sudo: john" /var/log/secure | grep "/sbin/useradd $i" > /dev/null
 	if (( $?==0 ))
 	then
-		echo "User $i was created by mohammad + 1 point" >> $detailed_report
+		echo "User $i was created by john + 1 point" >> $detailed_report
 		((task5_score++))
 		((test_score++))
 	else
-		echo "User $i was not added by mohammad failed" >> $detailed_report
+		echo "User $i was not added by john failed" >> $detailed_report
 	fi
 done
 
@@ -421,10 +421,10 @@ echo "Total test scores: $test_score out of 122" | tee -a $detailed_report $shor
 #showing created groups in report
 #
 echo "########## Added portion of /etc/group ##########" >> $detailed_report
-cut -d ":" -f1 /etc/group > /scripts/temp/etc_group_list.txt
-cut -d ":" -f1 /scripts/original_copy/etc_group_orig.txt > /scripts/temp/etc_group_list_orig.txt
-cat /scripts/temp/etc_group_list.txt /scripts/temp/etc_group_list_orig.txt | sort | uniq -u > /scripts/temp/group_delete_list.txt
-for j in $(cat /scripts/temp/group_delete_list.txt)
+cut -d ":" -f1 /etc/group > /var/scripts/temp/etc_group_list.txt
+cut -d ":" -f1 /var/scripts/original_copy/etc_group_orig.txt > /var/scripts/temp/etc_group_list_orig.txt
+cat /var/scripts/temp/etc_group_list.txt /var/scripts/temp/etc_group_list_orig.txt | sort | uniq -u > /var/scripts/temp/group_delete_list.txt
+for j in $(cat /var/scripts/temp/group_delete_list.txt)
 do
 	grep "^$j" /etc/group >> $detailed_report
 done
@@ -432,10 +432,10 @@ done
 #
 #
 echo "########## Added portion of /etc/gshadow ##########" >> $detailed_report
-cut -d ":" -f1 /etc/group > /scripts/temp/etc_group_list.txt
-cut -d ":" -f1 /scripts/original_copy/etc_group_orig.txt > /scripts/temp/etc_group_list_orig.txt
-cat /scripts/temp/etc_group_list.txt /scripts/temp/etc_group_list_orig.txt | sort | uniq -u > /scripts/temp/group_delete_list.txt
-for j in $(cat /scripts/temp/group_delete_list.txt)
+cut -d ":" -f1 /etc/group > /var/scripts/temp/etc_group_list.txt
+cut -d ":" -f1 /var/scripts/original_copy/etc_group_orig.txt > /var/scripts/temp/etc_group_list_orig.txt
+cat /var/scripts/temp/etc_group_list.txt /var/scripts/temp/etc_group_list_orig.txt | sort | uniq -u > /var/scripts/temp/group_delete_list.txt
+for j in $(cat /var/scripts/temp/group_delete_list.txt)
 do
 	grep "^$j" /etc/gshadow >> $detailed_report
 done
@@ -443,10 +443,10 @@ done
 #showing created users in report
 #
 echo "########## Added portion of /etc/passwd ##########" >> $detailed_report
-cut -d ":" -f1 /etc/passwd > /scripts/temp/etc_passwd_list.txt
-cut -d ":" -f1 /scripts/original_copy/etc_passwd_orig.txt > /scripts/temp/etc_passwd_list_orig.txt
-cat /scripts/temp/etc_passwd_list.txt /scripts/temp/etc_passwd_list_orig.txt | sort | uniq -u > /scripts/temp/users_delete_list.txt
-for i in $(cat /scripts/temp/users_delete_list.txt)
+cut -d ":" -f1 /etc/passwd > /var/scripts/temp/etc_passwd_list.txt
+cut -d ":" -f1 /var/scripts/original_copy/etc_passwd_orig.txt > /var/scripts/temp/etc_passwd_list_orig.txt
+cat /var/scripts/temp/etc_passwd_list.txt /var/scripts/temp/etc_passwd_list_orig.txt | sort | uniq -u > /var/scripts/temp/users_delete_list.txt
+for i in $(cat /var/scripts/temp/users_delete_list.txt)
 do
 	grep "^$i" /etc/passwd >> $detailed_report
 done
@@ -454,10 +454,10 @@ done
 #
 #
 echo "########## Added portion of /etc/shadow ##########" >> $detailed_report
-cut -d ":" -f1 /etc/passwd > /scripts/temp/etc_passwd_list.txt
-cut -d ":" -f1 /scripts/original_copy/etc_passwd_orig.txt > /scripts/temp/etc_passwd_list_orig.txt
-cat /scripts/temp/etc_passwd_list.txt /scripts/temp/etc_passwd_list_orig.txt | sort | uniq -u > /scripts/temp/users_delete_list.txt
-for i in $(cat /scripts/temp/users_delete_list.txt)
+cut -d ":" -f1 /etc/passwd > /var/scripts/temp/etc_passwd_list.txt
+cut -d ":" -f1 /var/scripts/original_copy/etc_passwd_orig.txt > /var/scripts/temp/etc_passwd_list_orig.txt
+cat /var/scripts/temp/etc_passwd_list.txt /var/scripts/temp/etc_passwd_list_orig.txt | sort | uniq -u > /var/scripts/temp/users_delete_list.txt
+for i in $(cat /var/scripts/temp/users_delete_list.txt)
 do
 	grep "^$i" /etc/shadow >> $detailed_report
 done
